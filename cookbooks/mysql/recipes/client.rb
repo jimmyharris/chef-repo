@@ -40,7 +40,7 @@ package "mysql-devel" do
   action :install
 end
 
-if platform?(%w{ debian ubuntu redhat centos fedora suse })
+if platform?(%w{ debian redhat centos fedora suse })
 
   package "mysql-ruby" do
     package_name value_for_platform(
@@ -52,9 +52,25 @@ if platform?(%w{ debian ubuntu redhat centos fedora suse })
   end
 
 else
-
+  Chef::Log.info("Going to install mysql gem")
   gem_package "mysql" do
     action :install
   end
-
 end
+# r = gem_package "mysql" do
+#     action :nothing
+#   end
+# 
+#   r.run_action(:install)
+# end
+
+# == Install MySQL client gem
+# Also installs in compile phase
+
+# r = execute "install mysql gem" do
+#   command "/gem install mysql --no-rdoc --no-ri -v 2.7 -- --build-flags --with-mysql-config"
+# end
+# r.run_action(:run)
+# 
+# Gem.clear_paths
+# log "Gem reload forced with Gem.clear_paths"
