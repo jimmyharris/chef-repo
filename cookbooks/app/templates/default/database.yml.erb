@@ -1,8 +1,9 @@
 ---
 production:
   adapter: <%= @adapter %>
+  encoding: utf8
   database: <%= @name %>
   username: <%= @user %>
   password: <%= @pass %>
   host: <%= @host %>
-  encoding: UTF8
+  socket: /var/run/mysqld/mysqld.sock
