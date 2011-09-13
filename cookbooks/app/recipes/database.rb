@@ -11,4 +11,6 @@ when "postgresql"
   include_recipe "app::db_postgres"
 when "sqlite3"
   include_recipe "app::db_sqlite3"
+when "mongoid"
+  include_recipe "app::db_mongoid"
 end

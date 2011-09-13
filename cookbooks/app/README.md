@@ -16,7 +16,7 @@ Attributes
 
 * `node["app"]["repository"] ` - Code to deploy (defaults to an
   example Rails 3.1 app)
-* `node["db"]["adapter"]` - Database such as postgresql, mysql, or
+* `node["db"]["adapter"]` - Database such as postgresql, mysql, mongodb or
   sqlite3 (default)
 
 
