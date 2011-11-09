@@ -1,0 +1,10 @@
+# DESCRIPTION:
+
+Installs the GitlabHq
+
+# REQUIREMENTS:
+
+# ATTRIBUTES:
+
+# USAGE:
+
