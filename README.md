@@ -16,6 +16,46 @@ This repository contains several directories, and each directory contains a READ
 * `data_bags/` - Store data bags and items in .json in the repository.
 * `roles/` - Store roles in .rb or .json in the repository.
 
+## Vagrantfile
+
+``` ruby
+Vagrant::Config.run do |config|
+  #aptdir = "#{ENV['HOME']}/aptcache/"
+  config.vm.box = "milli-ubuntu-11-10-32-bit"
+  config.vm.network "33.33.33.10"
+  config.vm.forward_port "http", 80, 8080
+  #config.vm.share_folder("v-apt", "/var/cache/apt", aptdir)
+  config.vm.customize do |vm|
+    vm.name = "GitlabHQ"
+    vm.memory_size = 256
+  end
+
+  config.vm.provision :chef_solo do |chef|
+    chef.log_level = :debug
+    #chef.recipe_url = "http://cloud.github.com/downloads/millisami/chef_repo/cookbooks.tar.gz"
+    chef.cookbooks_path = ["~/chef-repo/cookbooks"]
+    chef.roles_path = "~/chef/roles"
+    chef.run_list = [
+      #"recipe[apt::cacher]",
+      "recipe[base]",
+      "recipe[rvm::ruby_192]",
+      "recipe[nginx]"
+    ]
+    
+    chef.json.merge!(
+      { :mysql_password => "secret" },
+      { :base => 
+        {
+          :ohmyzsh => "https://github.com/millisami/oh-my-zsh.git",
+          :dotvim => "https://github.com/jtimberman/dotvim.git",
+          :system_packages => ["tree", "htop", "vim-nox"]
+        }
+      }
+    )
+  end
+end
+```
+
 Rake Tasks
 ==========
 
