@@ -10,7 +10,7 @@ package "curl"
 package "git-core"
 include_recipe "build-essential"
  
-%w(libreadline5-dev zlib1g-dev libssl-dev libxml2-dev libxslt1-dev).each do |pkg|
+%w(zlib1g-dev libssl-dev libxml2-dev libxslt1-dev).each do |pkg|
   package pkg
 end
 
@@ -22,15 +22,15 @@ execute "rvm-cleanup" do
   action :nothing
 end
  
-bash "installing system-wide RVM stable" do
+bash "installing multi-user(system-wide) RVM stable" do
   user "root"
-  code "bash < <( curl -L https://rvm.beginrescueend.com/install/rvm )"
+  code "sudo bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )"
   not_if "which rvm"
 end
 
 bash "upgrading to RVM head" do
   user "root"
-  code "rvm update --head ; rvm reload"
+  code "rvm get head ; rvm reload"
   only_if { node[:rvm][:version] == :head }
   only_if { node[:rvm][:track_updates] }
 end

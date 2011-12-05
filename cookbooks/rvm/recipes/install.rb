@@ -18,7 +18,7 @@ end
 
 bash "make #{ruby_version} the default ruby" do
   user "root"
-  code "/usr/local/rvm/bin/rvm --default #{ruby_version}"
+  code "/usr/local/rvm/bin/rvm use #{ruby_version} --default"
   not_if "rvm list | grep '=> #{ruby_version}'"
   only_if { node[:rvm][:ruby][:default] }
 #  notifies :restart, "service[chef-client]"
