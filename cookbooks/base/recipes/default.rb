@@ -2,7 +2,7 @@ execute "update-apt" do
   command "sudo apt-get update"
 end
 
-%w{curl wget lynx ack-grep vim git-core}.each do |pkg|
+%w{curl git-core}.each do |pkg|
   package pkg do
     action :install
   end
