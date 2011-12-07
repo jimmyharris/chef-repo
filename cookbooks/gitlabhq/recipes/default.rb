@@ -66,8 +66,8 @@ bash "setup_gitlabhq" do
     sudo -H -u git gitosis-init < ~/.ssh/id_rsa.pub 
     sudo chmod 755 /home/git/repositories/gitosis-admin.git/hooks/post-update  
     echo "gem: --no-rdoc --no-ri" > ~/.gemrc
-    echo "www-data ALL = (git) NOPASSWD: /bin/rm" | sudo tee -a /etc/sudoers
-    ssh localhost
+    #echo "www-data ALL = (git) NOPASSWD: /bin/rm" | sudo tee -a /etc/sudoers
+    #ssh localhost
   EOH
 end
 
